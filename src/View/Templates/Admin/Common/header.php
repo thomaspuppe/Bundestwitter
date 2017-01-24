@@ -29,14 +29,11 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li class="active"><a href="/admin/user/index"><i class="glyphicon glyphicon-user"></i> <span>Personen</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Verwaltung</span>
+          <a href="#"><i class="glyphicon glyphicon-briefcase"></i> <span>Verwaltung</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="glyphicon glyphicon-menu-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -44,13 +41,13 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Status</span>
+          <a href="#"><i class="glyphicon glyphicon-tasks"></i> <span>Status</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="glyphicon glyphicon-menu-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="7admin/status/phpinfo">PHP Info</a></li>
+            <li><a href="/admin/status/phpinfo">PHP Info</a></li>
           </ul>
         </li>
       </ul>

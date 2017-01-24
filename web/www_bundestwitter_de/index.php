@@ -10,7 +10,7 @@ define('BASE', 'http://' . $_SERVER['HTTP_HOST'] . $rootPathinfo['dirname'] . '/
 require_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . APP . '.php');
 
 // TODO: solve this more elegant!
-if ((ENVIRONMENT=='DEV' || isset($_COOKIE['btadmin'])) && strpos($_SERVER['REQUEST_URI'], '/api')===false && substr($_SERVER['REQUEST_URI'], 0, 6) != '/tweet') {
+if ((ENVIRONMENT=='DEV' || isset($_COOKIE['btadmin'])) && strpos($_SERVER['REQUEST_URI'], '/api')===false && substr($_SERVER['REQUEST_URI'], 0, 6) != '/admin') {
     $GLOBALS['PROFILING'] = array();
 }
 

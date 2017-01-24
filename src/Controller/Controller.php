@@ -1,6 +1,11 @@
 <?php
 namespace BT\Controller;
 
+use \BT\Service\DatabaseService;
+use \BT\Service\RequestService;
+use \BT\Service\ResponseService;
+use \BT\Service\TemplateService;
+
 class Controller
 {
 
@@ -8,31 +13,25 @@ class Controller
     protected $responseService;
     protected $isJsonResponse = false;
     protected $isAjaxResponse = false;
-    protected $useNewTemplates = false;
 
     public function __construct()
     {
-
-        $this->databaseService = \BT\Service\DatabaseService::getInstance();
-        $this->requestService = \BT\Service\RequestService::getInstance();
-        $this->responseService = \BT\Service\ResponseService::getInstance();
+        $this->databaseService = DatabaseService::getInstance();
+        $this->requestService = RequestService::getInstance();
+        $this->responseService = ResponseService::getInstance();
     }
 
-    protected function renderHeader($mainNavItem = null, $useNewTemplates = false)
+    protected function renderHeader($mainNavItem = null)
     {
         // Header einbinden/anzeigen, wenn Seite nicht per Ajax aufgerufen wurde
         if (!$this->isAjaxResponse && !$this->isJsonResponse && !$this->requestService->isAjaxRequest()) {
-            $headerTemplateName = 'Common/header';
-
-            if ($useNewTemplates == true) {
-                $headerTemplateName = 'Common/headerNew';
-            }
+            $headerTemplateName = 'Public/Common/header';
 
             if (strpos(get_class($this), 'Admin')) {
                 $headerTemplateName = 'Admin/Common/header';
             }
 
-            $headerView = new \BT\Service\TemplateService($headerTemplateName);
+            $headerView = new TemplateService($headerTemplateName);
 
             $headerView->assign(array(
                 'bodyclass' => 'TODO_BODYCLASS',
@@ -72,17 +71,13 @@ class Controller
 
         // Footer einbinden/anzeigen, wennn Seite nicht per Ajax aufgerufen wurde
         if (!$this->isAjaxResponse && !$this->isJsonResponse && !$this->requestService->isAjaxRequest()) {
-            $footerTemplateName = 'Common/footer';
-
-            if ($this->useNewTemplates == true) {
-                $footerTemplateName = 'Common/footerNew';
-            }
+            $footerTemplateName = 'Public/Common/footer';
 
             if (strpos(get_class($this), 'Admin')) {
                 $footerTemplateName = 'Admin/Common/footer';
             }
 
-            $footerView = new \BT\Service\TemplateService($footerTemplateName);
+            $footerView = new TemplateService($footerTemplateName);
             $this->responseService->write($footerView->render())->flush();
 
             if (isset($GLOBALS['PROFILING']) && isset($GLOBALS['QUERY_COUNTER'])) {
@@ -95,18 +90,6 @@ class Controller
 
     }
 
-
-
-    /* **************************************************************************
-     * Should only be called from Controller-Constructors or -Actions where
-     * needed (but these seem to be most ones.)
-     * *********************************************************************** */
-    protected function provideGlobalAccountData()
-    {
-        $GLOBALS['globalAccountData'] = unserialize(file_get_contents(ROOT . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . APP . DIRECTORY_SEPARATOR . 'globalAccountData.txt'));
-    }
-
-
     /* **************************************************************************
      * Default 404 Behaviour that can be called from any Controller.
      * TODO: custom 404 page content fpr any controller (e.g. account page)
@@ -114,7 +97,7 @@ class Controller
     protected function error404Action($args)
     {
         $this->responseService->setStatus(404);
-        $view = new \BT\Service\TemplateService('Page/error404');
+        $view = new TemplateService('Page/error404');
         $this->responseService->write($view->render());
         die();
     }
