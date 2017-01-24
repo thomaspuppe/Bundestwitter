@@ -434,7 +434,8 @@ class RouterService
 
     private function defineRoutes()
     {
-        // TODO: put this elsewhere?
+        $this->route('admin/party', 'AdminPartyController->indexAction');
+
         $this->route('admin/status/phpinfo', 'AdminStatusController->phpinfoAction');
 
         // Specifying a default callback function if no other route is matched
