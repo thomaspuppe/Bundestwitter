@@ -1,0 +1,104 @@
+// remify.scss
+// @function and @mixin to handle rem<->px value conversion
+//
+// by Mariusz Ciesla <http://mariusz.cc>
+
+$baseline-px: 16px;
+
+@function remify($px) {
+  $baseline-rem: $baseline-px / 1rem;
+
+  @if $px == 0 {
+    @return 0;
+  }
+
+  @if type-of(px) == "number" {
+    @return $px / $baseline-rem;
+  } @else {
+    $rems: ();
+
+    @each $value in $px {
+      @if $value == 0 {
+        $rems: append($rems, $value);
+      } @else {
+        $rems: append($rems, ($value / $baseline-rem));
+      }
+    }
+
+    @return $rems;
+  }
+}
+
+@mixin rem($property, $values) {
+  #{$property}: $values;
+  #{$property}: remify($values);
+}
+
+
+
+
+//  Author: Rafal Bromirski
+//  www: http://rafalbromirski.com/
+//  github: http://github.com/paranoida/sass-mediaqueries
+//
+//  Licensed under a MIT License
+//
+//  Version:
+//  1.6.1
+
+// --- generator ---------------------------------------------------------------
+
+@mixin mq($args...) {
+  $media-type: 'only screen';
+  $media-type-key: 'media-type';
+  $args: keywords($args);
+  $expr: '';
+
+  @if map-has-key($args, $media-type-key) {
+    $media-type: map-get($args, $media-type-key);
+    $args: map-remove($args, $media-type-key);
+  }
+
+  @each $key, $value in $args {
+    @if $value {
+      $expr: "#{$expr} and (#{$key}: #{$value})";
+    }
+  }
+
+  @media #{$media-type} #{$expr} {
+    @content;
+  }
+}
+
+// --- screen ------------------------------------------------------------------
+
+@mixin screen($min, $max, $orientation: false) {
+  @include mq($min-width: $min, $max-width: $max, $orientation: $orientation) {
+    @content;
+  }
+}
+
+@mixin max-screen($max) {
+  @include mq($max-width: $max) {
+    @content;
+  }
+}
+
+@mixin min-screen($min) {
+  @include mq($min-width: $min) {
+    @content;
+  }
+}
+
+
+// http://coderesponsible.com/useful-sass-mixins/
+@mixin linearGradient($top, $bottom){
+    background: $top; /* Old browsers */
+    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}

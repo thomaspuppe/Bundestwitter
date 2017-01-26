@@ -1,0 +1,11 @@
+// holy shit, this is a pattern
+%verticalgrid
+	background-image: linear-gradient(transparent 50%, rgba(255,0,0,.5) 50%)
+	background-size: remify($base-line-height $base-line-height)
+
+%containerize
+	margin: 0 auto
+	max-width: $content-width
+	padding: 0 $padding-horizontal
+	@include min-screen($breakpoint-medium)
+		padding: 0 $padding-horizontal--large

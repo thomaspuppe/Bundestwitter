@@ -1,0 +1,59 @@
+// http://webdesign.about.com/od/colorpalettes/ig/Color-Palettes/basics.htm
+//#1B3139
+//#466277
+//#FFE4CE
+//#F9EEF3
+
+$color-body-bg: #FCFCFC
+$color-body-text: #1B3139
+
+$fontstack_serif: "Hoefler Text", "Baskerville", "Garamond", "Palatino Linotype", "Georgia", "Times New Roman", serif
+
+$base-line-height: 20px
+
+$breakpoint-medium: 800px
+$breakpoint-large: 1200px
+
+$padding-vertical: remify($base-line-height)
+$padding-vertical--small: remify($base-line-height/2) // only allowed to be used double
+$padding-vertical--large: remify(2*$base-line-height)
+$padding-horizontal: remify(10px)
+$padding-horizontal--large: remify(25px)
+
+$content-width: remify(1200px)
+$content-width--s: remify(980px)
+$content-width--xl: remify(1600px)
+
+/* *****************************************************************************
+ * Farbcodes (Quelle: Styleguides oder Website)
+ *
+ * SPD: 226|0|26    #E1001A (http://www.designtagebuch.de/cd-manuals/Jusos_Corporate_Design_kurz.pdf)
+ * CDU: 0|0|0       #000000 (http://www.designtagebuch.de/cd-manuals/cdu_design_manual.pdf)
+ * FDP: 251|238|49  #FBEE31 (http://www.designtagebuch.de/cd-manuals/fdp-cd-manual.pdf)
+ * GRN: 100|161|45  #64A12D (http://www.designtagebuch.de/cd-manuals/buendnis90-gruene-ci-manual.pdf)
+ *      76|184|72   #4CB848 (gemessen im Styleguide. Oberer Wert ist berechnet aus Print-RGB-Angaben.)
+ * LNK: 255|0|0     #FF0000 (http://www.designtagebuch.de/cd-manuals/die-linke-umgang_mit_der_marke.pdf)
+ *      171|64|114  #AB4072 (Parteifarbe bei Infratest Dimap Sonntagsfrage)
+ * NIX: 153|153|153 #999999 (Parteifarbe "sonstige" bei Infratest Dimap Sonntagsfrage)
+ * ************************************************************************** */
+
+$partyMainColorFallback: #DFDFDF
+$partyContrastColorFallback: #000
+
+$partyMainColorSpd: lighten(#E1001A, 15)
+$partyContrastColorSpd: #fff
+
+$partyMainColorCduCsu: lighten(#000, 15)
+$partyContrastColorCduCsu: #fff
+
+$partyMainColorFdp: lighten(#FBEE31, 5)
+$partyContrastColorFdp: #000
+
+$partyMainColorDieLinke: lighten(#AB4072, 15)
+$partyContrastColorDieLinke: #fff
+
+$partyMainColorGruene: lighten(#64A12D, 15)
+$partyContrastColorGruene: #000
+
+$partyMainColorParteilos: lighten(#999999, 15)
+$partyContrastColorParteilos: #000

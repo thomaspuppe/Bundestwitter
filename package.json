@@ -1,0 +1,14 @@
+{
+  "name": "www.bundestwitter.de",
+  "version": "3.0.0",
+  "description": "www.bundestwitter.de",
+  "author": "Thomas Puppe",
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:thomaspuppe/bundestwitter.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build-css": "sass --watch src/Assets/sass/styles.sass:web/www_bundestwitter_de/assets/css/styles.css"
+  }
+}

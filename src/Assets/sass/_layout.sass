@@ -1,0 +1,92 @@
+body
+	background-color: $color-body-bg
+	color: $color-body-text
+	font-family: $fontstack-serif
+	font-size: 1.2em
+	line-height: 1.4
+	@include min-screen($breakpoint-medium)
+		font-size: 1.4em
+	@include min-screen($breakpoint-large)
+		font-size: 1.6em
+	&.gridded
+		@extend %verticalgrid
+
+h1
+	line-height: 1.1
+
+.container
+	@extend %containerize
+	padding-bottom: $padding-vertical
+	padding-top: $padding-vertical
+	img
+		max-width: 100%
+
+.container--xl
+	max-width: $content-width--xl
+
+.container--s
+	max-width: $content-width--s
+
+nav[role="navigation"][aria-label="Primary"]
+	//background-color: #FFF
+	background-color: #1B3139
+	@extend %containerize
+	line-height: remify($base-line-height)
+	//color: #1B3139
+	color: #FFF
+	text-align: center
+	@include min-screen($breakpoint-large)
+		padding-bottom: $padding-vertical--small
+		padding-top: $padding-vertical--small
+	a
+		color: currentColor
+.logo
+	color: #1B3139
+	font-size: 32px
+	line-height: remify(2*$base-line-height)
+	text-decoration: none
+	img
+		display: none
+		height: 35px
+		@include min-screen(500px)
+			height: 48px
+		@include min-screen(900px)
+			height: 70px
+			vertical-align: bottom
+	&__title
+		font-size: remify(32px)
+		font-weight: bold
+	&__claim
+		display: none
+		@include min-screen(500px)
+			display: inline
+			font-size: 24px
+			white-space: nowrap
+
+body>section
+	@extend %containerize
+
+body>footer
+	@extend %containerize
+	border-top: 2px #1B3139 solid
+	color: #1B3139
+	line-height: remify($base-line-height)
+
+	a
+		color: currentColor
+
+
+
+.fukol-grid
+	display: flex /* 1 */
+	flex-wrap: wrap /* 2 */
+	// margin: -0.5em /* 5 (edit me!) */
+
+.fukol-grid > *
+	flex: 1 0 8em /* 3 (edit me!) */
+	margin: 0.3em 1em /* 4 (edit me!) */
+
+.fukol-grid > h1,
+.fukol-frid > h2,
+.fukol-grid > h3
+	display: block
