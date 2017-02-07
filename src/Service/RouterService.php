@@ -441,6 +441,7 @@ class RouterService
         $this->route('admin/party', 'AdminPartyController->indexAction');
 
         $this->route('admin/status/phpinfo', 'AdminStatusController->phpinfoAction');
+        $this->route('admin/status', 'AdminStatusController->indexAction');
 
         // Specifying a default callback function if no other route is matched
         $this->defaultRoute('PageController->error404Action');

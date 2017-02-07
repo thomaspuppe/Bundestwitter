@@ -3,7 +3,7 @@
     PHP Info
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="glyphicon glyphicon-dashboard"></i> Status</a></li>
+    <li><a href="/admin/status"><i class="glyphicon glyphicon-dashboard"></i> Status</a></li>
     <li class="active">PHP Info</li>
   </ol>
 </section>
