@@ -437,8 +437,9 @@ class RouterService
 
         $this->route('styleguide', 'StyleguideController->indexAction');
 
-
         $this->route('admin/party', 'AdminPartyController->indexAction');
+
+        $this->route('admin/person/candidate', 'AdminPersonController->candidateAction');
 
         $this->route('admin/status/phpinfo', 'AdminStatusController->phpinfoAction');
         $this->route('admin/status', 'AdminStatusController->indexAction');
