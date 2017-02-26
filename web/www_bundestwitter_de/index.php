@@ -10,7 +10,7 @@ define('BASE', 'http://' . $_SERVER['HTTP_HOST'] . $rootPathinfo['dirname'] . '/
 require_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . APP . '.php');
 
 // TODO: solve this more elegant!
-if ((ENVIRONMENT=='DEV' || isset($_COOKIE['btadmin'])) && strpos($_SERVER['REQUEST_URI'], '/api')===false && substr($_SERVER['REQUEST_URI'], 0, 6) != '/admin') {
+if ((ENVIRONMENT=='DEV' || isset($_COOKIE['btadmin'])) && strpos($_SERVER['REQUEST_URI'], '/api')===false /*&& substr($_SERVER['REQUEST_URI'], 0, 6) != '/admin'*/) {
     $GLOBALS['PROFILING'] = array();
 }
 
@@ -32,7 +32,7 @@ if (isset($GLOBALS['PROFILING'])) {
     $GLOBALS['PROFILING'][] = array('END', microtime(true));
 
     #echo "<!-- ";
-    echo '<div id="debugPanel" style="background: #FBFF98; font-size: 0.8em; left: 0; position:absolute; top: 0; z-index:9999;"><pre>';
+    echo '<pre id="debugPanel" style="background: #FBFF98; font-size: 0.8em; right: 0; position:absolute; top: 0; z-index:9999;">';
     echo '<a href="#" onClick="document.getElementById(\'debugPanel\').style.display = \'none\'; return false;">REMOVE</a>';
 
     $firstRowTime = null;
@@ -63,5 +63,5 @@ if (isset($GLOBALS['PROFILING'])) {
     }
 
     #echo "\n -->";
-    echo '</pre></div>';
+    echo '</pre>';
 }
