@@ -1,6 +1,8 @@
 <?php
 namespace BT\Model;
 
+use \BT\Service\DatabaseService;
+
 class Repository
 {
     protected $databaseService;
@@ -9,8 +11,7 @@ class Repository
 
     public function __construct()
     {
-        $this->databaseService = \BT\Service\DatabaseService::getInstance();
-        #$this->databaseCacheService = \BT\Service\DatabaseCacheService::getInstance();
+        $this->databaseService = DatabaseService::getInstance();
     }
 
     public function findAll()

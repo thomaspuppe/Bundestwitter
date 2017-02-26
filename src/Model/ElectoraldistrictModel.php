@@ -2,6 +2,7 @@
 namespace BT\Model;
 
 use BT\Model\DistrictRepository;
+use BT\Service\MemcachedService;
 
 class ElectoraldistrictModel extends Model
 {
@@ -20,9 +21,15 @@ class ElectoraldistrictModel extends Model
 
     public function getDistrict()
     {
-        // TODO: lieber Singletonähnliches Ding???
-        $districtRepository = new DistrictRepository();
-        $district = $districtRepository->findOneBy(array('id' => $this->district_id));
+        $this->memcachedService = MemcachedService::getInstance();
+        $cacheKey = 'Model_District_' . $this->district_id;
+        $district = $this->memcachedService->get($cacheKey);
+        if (!$district) {
+            // OPTIMIZE: lieber Singletonähnliches Ding???
+            $districtRepository = new DistrictRepository();
+            $district = $districtRepository->findOneBy(array('id' => $this->district_id));
+            $this->memcachedService->set($cacheKey, $district);
+        }
         return $district;
     }
 }
