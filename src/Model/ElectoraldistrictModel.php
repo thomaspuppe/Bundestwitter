@@ -1,6 +1,8 @@
 <?php
 namespace BT\Model;
 
+use BT\Model\DistrictRepository;
+
 class ElectoraldistrictModel extends Model
 {
     protected $databaseTableName = 'electoraldistrict';
@@ -14,4 +16,13 @@ class ElectoraldistrictModel extends Model
     protected $geo_center_lon;
     protected $slug;
     protected $seats;
+
+
+    public function getDistrict()
+    {
+        // TODO: lieber Singletonähnliches Ding???
+        $districtRepository = new DistrictRepository();
+        $district = $districtRepository->findOneBy(array('id' => $this->district_id));
+        return $district;
+    }
 }

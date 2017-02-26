@@ -439,6 +439,7 @@ class RouterService
 
         $this->route('admin/party', 'AdminPartyController->indexAction');
 
+        $this->route('admin/person', 'AdminPersonController->indexAction');
         $this->route('admin/person/candidate', 'AdminPersonController->candidateAction');
 
         $this->route('admin/status/phpinfo', 'AdminStatusController->phpinfoAction');

@@ -27,6 +27,35 @@ class Repository
 
     }
 
+    public function findOneBy($whereArray = null)
+    {
+
+        $query = 'SELECT * FROM ' . $this->databaseTableName;
+
+        if (is_array($whereArray)) {
+            $queryWhere = '';
+            foreach ($whereArray as $field => $value) {
+                if ($queryWhere == '') {
+                    $queryWhere .= ' WHERE ' . $field . ' = "' . $value . '"';
+                } else {
+                    $queryWhere .= ' AND ' . $field . ' = "' . $value . '"';
+                }
+            }
+            $query .= $queryWhere;
+        }
+
+        $query .= ' LIMIT 1';
+
+        $dbResult = $this->databaseService->runQuery($query);
+
+        if (mysqli_num_rows($dbResult) == 0) {
+            return false;
+        }
+
+        return $this->convertMysqlResultToSingleModel($dbResult);
+    }
+
+
     protected function convertMysqlResultToModelArray($mysqlResult)
     {
         $modelName = '\\BT\\Model\\' . ucfirst($this->databaseTableName) . 'Model';

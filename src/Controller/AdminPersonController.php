@@ -15,6 +15,19 @@ class AdminPersonController extends Controller
         $this->renderHeader('adminPerson');
     }
 
+    public function indexAction()
+    {
+        $personRepository = new PersonRepository();
+        $persons = $personRepository->findAll();
+
+        $view = new TemplateService('Admin/Person/index');
+        $view->assign(array(
+            'persons' => $persons
+        ));
+
+        $this->responseService->write($view->render());
+    }
+
     public function candidateAction()
     {
         $partyRepository = new PartyRepository();
@@ -33,8 +46,22 @@ class AdminPersonController extends Controller
             }
         }
 
+        $countPersons = count($persons);
+        $countDirectCandidates = 0;
+        $countListCandidates = array();
+        $countDirectCandidateSlots = count($electoraldistricts) * count($parties);
+
         foreach ($persons as $person) {
-            $candidateArray[$person->electoraldistrict_id][$person->party_slug] = $person->getName();
+            if ($person->electoraldistrict_id > 0) {
+                $candidateArray[$person->electoraldistrict_id][$person->party_slug] = $person->getName();
+                $countDirectCandidates++;
+            } else {
+                if (isset($countListCandidates[$person->party_slug])) {
+                    $countListCandidates[$person->party_slug]++;
+                } else {
+                    $countListCandidates[$person->party_slug] = 1;
+                }
+            }
         }
 
         $view = new TemplateService('Admin/Person/candidate');
@@ -42,7 +69,11 @@ class AdminPersonController extends Controller
             'parties' => $parties,
             'persons' => $persons,
             'electoraldistricts' => $electoraldistricts,
-            'candidateArray' => $candidateArray
+            'candidateArray' => $candidateArray,
+            'countPersons' => $countPersons,
+            'countDirectCandidates' => $countDirectCandidates,
+            'countListCandidates' => $countListCandidates,
+            'countDirectCandidateSlots' => $countDirectCandidateSlots
         ));
 
         $this->responseService->write($view->render());
